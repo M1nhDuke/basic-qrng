@@ -1,2 +1,4 @@
 # basic-qrng
-Quantum Random Number Generator: A simple implement of Qiskit and Cirq
+Quantum Random Number Generator: A simple implement of Qiskit, Cirq and PennyLane
+
+
