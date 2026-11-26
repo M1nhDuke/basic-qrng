@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Random Number Generator</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  form { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+  label { display: flex; flex-direction: column; }
+  code { overflow-wrap: anywhere; }
+  .note { color: #555; font-size: 0.9rem; }
+  .error { color: #b00020; }
+</style>
+</head>
+<body>
+<h1>Quantum Random Number Generator</h1>
+<p class="note">Each bit is one measurement of a qubit after a Hadamard gate. Runs on a local simulator,
+  which draws outcomes from a classical pseudo-random generator: a demo, not true quantum randomness.</p>
+
+<form method="get">
+  <label>Backend
+    <select name="backend">
+      {% for b in backends %}<option value="{{ b }}"{% if b == backend %} selected{% endif %}>{{ b }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Bits
+    <input type="number" name="bits" min="{{ min_bits }}" max="{{ max_bits }}" value="{{ bits }}" required>
+  </label>
+  <button>Generate</button>
+</form>
+
+{% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+{% if result %}
+<h2>Result ({{ backend }}, {{ result|length }} bits)</h2>
+<p>Bits: <code>{{ result }}</code></p>
+<p>Integer: <code>{{ number }}</code></p>
+{% endif %}
+</body>
+</html>
